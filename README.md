@@ -4,6 +4,7 @@ Chatbot Planestic es un asistente impulsado por IA diseñado para responder preg
 
 ## Estructura del Proyecto
 
+```
 PLANESTIC-CHATBOT/
 ├── venv/
 ├── .env
@@ -11,7 +12,7 @@ PLANESTIC-CHATBOT/
 ├── QAHandler.py
 ├── README.md
 ├── requirements.txt
-
+```
 
 ## Comenzando
 
