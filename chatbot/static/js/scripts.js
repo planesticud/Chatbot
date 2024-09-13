@@ -16,6 +16,41 @@ function appendMessage(content, sender) {
     chatHistory.scrollTop = chatHistory.scrollHeight; // Desplazarse hacia abajo automáticamente
 }
 
+// Mostrar animación de "Escribiendo..." con puntos animados
+function showTypingIndicator() {
+    const chatHistory = document.getElementById("chatHistory");
+
+    const typingIndicator = document.createElement("div");
+    typingIndicator.id = "typingIndicator";
+    typingIndicator.classList.add("chat-message", "bot");
+
+    // Crear contenedor para los puntos animados
+    const dotsContainer = document.createElement("span");
+    dotsContainer.classList.add("dots-container");
+
+    // Crear los puntos animados
+    for (let i = 0; i < 3; i++) {
+        const dot = document.createElement("span");
+        dot.classList.add("dot");
+        dot.textContent = ".";
+        dotsContainer.appendChild(dot);
+    }
+
+    typingIndicator.textContent = "Escribiendo "; // Texto antes de los puntos
+    typingIndicator.appendChild(dotsContainer); // Añadir puntos animados
+
+    chatHistory.appendChild(typingIndicator);
+    chatHistory.scrollTop = chatHistory.scrollHeight;
+}
+
+// Ocultar animación de "Escribiendo..."
+function hideTypingIndicator() {
+    const typingIndicator = document.getElementById("typingIndicator");
+    if (typingIndicator) {
+        typingIndicator.remove();
+    }
+}
+
 // Función para enviar el mensaje
 function sendMessage() {
     const userInput = document.getElementById("userMessage");
@@ -25,6 +60,9 @@ function sendMessage() {
 
     // Añadir el mensaje del usuario al chat
     appendMessage(message, "user");
+
+    // Mostrar el indicador de "Escribiendo..."
+    showTypingIndicator();
 
     // Preparar datos para enviar
     const data = { message: message };
@@ -39,6 +77,9 @@ function sendMessage() {
     })
         .then((response) => response.json())
         .then((data) => {
+            // Ocultar el indicador de "Escribiendo..."
+            hideTypingIndicator();
+
             if (data.response) {
                 // Añadir la respuesta del bot al chat
                 appendMessage(data.response, "bot");
@@ -49,6 +90,7 @@ function sendMessage() {
         })
         .catch((error) => {
             console.error("Error:", error);
+            hideTypingIndicator();
             appendMessage("Error al comunicarse con el servidor.", "bot");
         });
 

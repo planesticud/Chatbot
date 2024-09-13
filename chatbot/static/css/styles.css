@@ -96,3 +96,46 @@ body {
     padding-left: 10px; /* Espacio entre el texto y el borde izquierdo */
 }
 
+/* Estilo para el mensaje de "Escribiendo..." con animación de puntos */
+#typingIndicator {
+    background-color: #e0e0e0; /* Gris claro para mensajes del bot */
+    color: #4A4A4A; /* Gris oscuro para el texto */
+    align-self: flex-end;
+    border-bottom-right-radius: 0; /* Ajuste de esquina para el bot */
+    text-align: justify; /* Alinea el texto del mensaje a la derecha */
+    margin-left: auto; /* Empuja el mensaje hacia el borde derecho */
+    width: calc(100% - 20px); /* Ajusta el ancho para que se pegue al borde */
+    padding-right: 10px; /* Espacio entre el texto y el borde derecho */
+    padding-left: 10px; /* Espacio entre el texto y el borde izquierdo */
+}
+
+.dots-container {
+    display: inline-block;
+}
+
+.dot {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.5em;
+    line-height: 1;
+    margin-left: 2px;
+    position: relative;
+    animation: bounce 0.6s infinite alternate;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
