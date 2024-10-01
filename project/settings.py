@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from dotenv import load_dotenv
+import warnings
 import os
 load_dotenv()
 
@@ -48,7 +49,22 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'csp.middleware.CSPMiddleware',
 ]
+
+# Obtener la lista de dominios para ser insertado
+allowed_origins_list = [origin.strip() for origin in os.getenv('ALLOWED_IFRAME_ORIGINS', '').split(',') if origin.strip()]
+# Permisos de insertar
+CSP_FRAME_ANCESTORS = [
+    "'self'",
+    *allowed_origins_list,
+]
+# Permisos de Scrips
+CSP_SCRIPT_SRC_ELEM = [
+    "'self'",  
+    'https://cdn.jsdelivr.net'
+]
+
 
 ROOT_URLCONF = 'project.urls'
 
@@ -126,3 +142,40 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,  # Mantener loggers existentes activos
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'chatbot': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}
+
+# Ignora todas las advertencias (no recomendado para uso general)
+#warnings.filterwarnings('ignore')
