@@ -4,13 +4,18 @@ function getCSRFToken() {
     return csrfToken ? csrfToken[1] : null;
 }
 
-// Función para crear y añadir un mensaje al chat
-function appendMessage(content, sender) {
+function appendMessage(content, sender, isMarkdown = false) {
     const chatHistory = document.getElementById("chatHistory");
 
     const messageElement = document.createElement("div");
     messageElement.classList.add("chat-message", sender);
-    messageElement.textContent = content;
+
+    // Si el contenido es Markdown, conviértelo a HTML usando marked.js
+    if (isMarkdown) {
+        messageElement.innerHTML = marked.parse(content); // Convertir Markdown a HTML
+    } else {
+        messageElement.textContent = content; // Añadir texto normal
+    }
 
     chatHistory.appendChild(messageElement);
     chatHistory.scrollTop = chatHistory.scrollHeight; // Desplazarse hacia abajo automáticamente
@@ -79,10 +84,10 @@ function sendMessage() {
         .then((data) => {
             // Ocultar el indicador de "Escribiendo..."
             hideTypingIndicator();
-
+            
             if (data.response) {
-                // Añadir la respuesta del bot al chat
-                appendMessage(data.response, "bot");
+                // Añadir la respuesta del bot al chat con Markdown convertido a HTML
+                appendMessage(data.response, "bot", true);
             } else if (data.error) {
                 // Manejar errores devueltos por el servidor
                 appendMessage("Error: " + data.error, "bot");
