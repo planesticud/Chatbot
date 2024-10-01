@@ -36,6 +36,7 @@ body {
     overflow-y: auto;
     flex-grow: 1;
     background-color: #F0F0F0; /* Fondo gris claro */
+    word-wrap: break-word; /* Asegura que el texto no se desborde */
 }
 
 .chat-input {
@@ -89,11 +90,50 @@ body {
     color: #4A4A4A; /* Gris oscuro para el texto */
     align-self: flex-end;
     border-bottom-right-radius: 0; /* Ajuste de esquina para el bot */
-    text-align: justify; /* Alinea el texto del mensaje a la derecha */
+    text-align: justify; /* Justificar contenido del Markdown */
     margin-left: auto; /* Empuja el mensaje hacia el borde derecho */
     width: calc(100% - 20px); /* Ajusta el ancho para que se pegue al borde */
     padding-right: 10px; /* Espacio entre el texto y el borde derecho */
     padding-left: 10px; /* Espacio entre el texto y el borde izquierdo */
+}
+
+/* Justificar contenido Markdown */
+.chat-message.bot p,
+.chat-message.bot h1,
+.chat-message.bot h2,
+.chat-message.bot h3,
+.chat-message.bot ul,
+.chat-message.bot ol,
+.chat-message.bot li {
+    text-align: justify; /* Justificar contenido Markdown */
+}
+
+/* Ajuste de estilos para el contenido Markdown */
+.chat-message.bot p {
+    margin: 0 0 10px;
+}
+
+.chat-message.bot ul {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.chat-message.bot li {
+    margin-bottom: 5px;
+}
+
+.chat-message.bot code {
+    background-color: #f5f5f5;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.chat-message.bot pre {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto;
 }
 
 /* Estilo para el mensaje de "Escribiendo..." con animación de puntos */
