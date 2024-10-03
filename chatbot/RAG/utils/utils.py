@@ -88,6 +88,6 @@ def log_message_interaction(token: str, user_message: str, response: str):
                 writer.writerow(['Token', 'Time', 'User Message', 'Response'])
             writer.writerow([token,current_time,user_message,clean_markdown_message(response)])
         
-        logger.info(f"Registro guardado > Token: {token}, Hora: {current_time}, Mensaje: {user_message}, Respuesta: {response}")
+        logger.info(f"Registro guardado")
     except Exception as e:
         logger.error(f"Error al guardar la interacción en {file_path}: {e}")
