@@ -56,6 +56,22 @@ function hideTypingIndicator() {
     }
 }
 
+// Bloquear el botón de enviar
+function disableSendButton() {
+    const sendButton = document.querySelector(".chat-input button");
+    sendButton.disabled = true;
+    sendButton.style.backgroundColor = "#ccc"; // Cambiar color para indicar que está deshabilitado
+    sendButton.style.cursor = "not-allowed"; // Cambiar cursor para indicar que no es clicable
+}
+
+// Desbloquear el botón de enviar
+function enableSendButton() {
+    const sendButton = document.querySelector(".chat-input button");
+    sendButton.disabled = false;
+    sendButton.style.backgroundColor = "#002855"; // Restaurar el color original
+    sendButton.style.cursor = "pointer"; // Restaurar el cursor original
+}
+
 // Función para enviar el mensaje
 function sendMessage() {
     const userInput = document.getElementById("userMessage");
@@ -66,8 +82,9 @@ function sendMessage() {
     // Añadir el mensaje del usuario al chat
     appendMessage(message, "user");
 
-    // Mostrar el indicador de "Escribiendo..."
+    // Mostrar el indicador de "Escribiendo..." y Bloquear el botón de enviar
     showTypingIndicator();
+    disableSendButton();
 
     // Preparar datos para enviar
     const data = { message: message };
@@ -82,8 +99,9 @@ function sendMessage() {
     })
         .then((response) => response.json())
         .then((data) => {
-            // Ocultar el indicador de "Escribiendo..."
+            // Ocultar el indicador de "Escribiendo..." y Desbloquear el botón de enviar
             hideTypingIndicator();
+            enableSendButton();
             
             if (data.response) {
                 // Añadir la respuesta del bot al chat con Markdown convertido a HTML
