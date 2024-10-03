@@ -167,4 +167,4 @@ chatbot/docs/*.pdf
 .DS_Store
 
 # Database CSV
-chatbot/rag/databse/*.csv
+chatbot/rag/database/*.csv
