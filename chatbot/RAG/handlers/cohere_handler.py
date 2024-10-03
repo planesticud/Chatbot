@@ -1,4 +1,4 @@
-# ./chatbot/RAG/QA_Cohere_Handler.py
+# ./chatbot/rag/QA_Cohere_Handler.py
 
 import os
 import re
@@ -8,10 +8,10 @@ from dotenv import load_dotenv
 from langchain.chains import RetrievalQA
 from langchain_core.prompts import PromptTemplate
 from langchain_cohere.chat_models import ChatCohere
-from chatbot.RAG.utils.singleton_meta import SingletonMeta
-from chatbot.RAG.handlers.base_handler import BaseQAHandler
-from chatbot.RAG.utils import utils
-from chatbot.RAG.utils.patterns import (
+from chatbot.rag.utils.singleton_meta import SingletonMeta
+from chatbot.rag.handlers.base_handler import BaseQAHandler
+from chatbot.rag.utils import utils
+from chatbot.rag.utils.patterns import (
     prompt_template,
     greetings,
     greeting_messages,

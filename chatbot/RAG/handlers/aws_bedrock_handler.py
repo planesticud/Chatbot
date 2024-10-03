@@ -1,14 +1,14 @@
-# ./chatbot/RAG/QA_AWS_Bedrock_Handler.py
+# ./chatbot/rag/QA_AWS_Bedrock_Handler.py
 
 import re
 import random
 import logging
 from langchain_core.prompts import PromptTemplate
-from chatbot.RAG.utils.singleton_meta import SingletonMeta
-from chatbot.RAG.handlers.base_handler import BaseQAHandler
-from chatbot.RAG.utils import utils
+from chatbot.rag.utils.singleton_meta import SingletonMeta
+from chatbot.rag.handlers.base_handler import BaseQAHandler
+from chatbot.rag.utils import utils
 from ..clients.aws_client import get_client
-from chatbot.RAG.utils.patterns import (
+from chatbot.rag.utils.patterns import (
     prompt_template,
     greetings,
     greeting_messages,

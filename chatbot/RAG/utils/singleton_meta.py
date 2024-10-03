@@ -1,4 +1,4 @@
-# ./chatbot/RAG/singleton_meta.py
+# ./chatbot/rag/singleton_meta.py
 
 from abc import ABCMeta
 

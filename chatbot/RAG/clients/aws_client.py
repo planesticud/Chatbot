@@ -1,4 +1,4 @@
-# .chatbot/RAG/aws_client.py
+# .chatbot/rag/aws_client.py
 
 import boto3
 import logging

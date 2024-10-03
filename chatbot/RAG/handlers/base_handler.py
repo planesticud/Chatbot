@@ -1,4 +1,4 @@
-# ./chatbot/RAG/base_handler.py
+# ./chatbot/rag/base_handler.py
 
 from abc import ABC, abstractmethod
 

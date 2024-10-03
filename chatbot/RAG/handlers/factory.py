@@ -1,7 +1,7 @@
-# ./chatbot/RAG/handler_factory.py
+# ./chatbot/rag/handler_factory.py
 
 import logging
-from chatbot.RAG.handlers import aws_bedrock_handler, cohere_handler
+from chatbot.rag.handlers import aws_bedrock_handler, cohere_handler
 
 logger = logging.getLogger(__name__)
 

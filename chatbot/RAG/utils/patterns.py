@@ -1,3 +1,5 @@
+# ./chatbot/rag/patterns.py
+
 prompt_template = (
     """
     Eres un asistente de IA que responde preguntas basadas en documentos.
