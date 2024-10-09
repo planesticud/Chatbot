@@ -40,8 +40,8 @@ def send_message(request):
 
     :param request: HTTP request containing the user's message in JSON format.
     :return: JSON response with the chatbot's answer or an error if the method is not allowed.
-    """
-    if request.method == 'POST':
+    """ 
+    if request.method == 'POST': 
         csrf_token = request.META.get('HTTP_X_CSRFTOKEN', 'No CSRF token found')
         data = json.loads(request.body)
         user_message = data.get('message')

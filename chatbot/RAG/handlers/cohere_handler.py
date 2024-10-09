@@ -82,6 +82,7 @@ class QA_CohereHandler(BaseQAHandler, metaclass=SingletonMeta):
         Loads the Cohere LLM model to generate responses.
         """
         try:
+            print(self.max_tokens)
             self.llm = ChatCohere(
                 model=self.model,
                 temperature=self.temperature,

@@ -4,13 +4,13 @@
         "aws_bedrock": {
             "model": "cohere.command-r-v1:0",
             "temperature": 0.2,
-            "max_tokens": 300,
+            "max_tokens": 50,
             "docs_directory": "./chatbot/docs/"
         },
         "cohere": {
             "model": "command-nightly",
             "temperature": 0.2,
-            "max_tokens": 300,
+            "max_tokens": 100,
             "docs_directory": "./chatbot/docs/"
         }
     }
