@@ -8,9 +8,11 @@ Este proyecto es un chatbot RAG desarrollado con Django que utiliza Cohere para 
 .
 ├── chatbot
 │   ├── docs
+│   │   └── *.pdf
 │   ├── migrations
 │   ├── rag
 │   │   ├── clients
+│   │   │   ├── __init__.py
 │   │   │   └── aws_client.py
 │   │   ├── config
 │   │   │   └── config.json
@@ -18,20 +20,30 @@ Este proyecto es un chatbot RAG desarrollado con Django que utiliza Cohere para 
 │   │   │   ├── info.txt
 │   │   │   └── log_message_interaction.csv
 │   │   ├── handlers
+│   │   │   ├── __init__.py
 │   │   │   ├── aws_bedrock_handler.py
 │   │   │   ├── cohere_handler.py
 │   │   │   ├── base_handler.py
 │   │   │   └── factory.py
 │   │   ├── utils
+│   │   │   ├── __init__.py
 │   │   │   ├── patterns.py
 │   │   │   ├── singleton_meta.py
 │   │   │   └── utils.py
 │   ├── static
+│   │   ├── css
+│   │   │   └── styles.css
+│   │   ├── js
+│   │   │   └── scripts.js
 │   ├── templates
 │   │   └── index.html
 │   ├── views.py
 ├── project
+│   ├── __init__.py
+│   ├── asgi.py
 │   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
 ├── manage.py
 ├── Dockerfile
 ├── README.md
