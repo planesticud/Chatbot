@@ -65,7 +65,6 @@ Este proyecto es un chatbot RAG desarrollado con Django que utiliza Cohere para 
     ```
     COHERE_API_KEY=tu_clave_cohere
     DJANGO_SECRET_KEY=tu_clave_secreta_django
-    ALLOWED_IFRAME_ORIGINS=dominio1.com,dominio2.com
     ```
 
 ### Instalación
@@ -79,7 +78,7 @@ Este proyecto es un chatbot RAG desarrollado con Django que utiliza Cohere para 
 2. Crea y activa un entorno virtual:
     ```
     python -m venv venv
-    source venv/bin/activate  # En Windows usa: venv\Scripts\activate
+    source venv/bin/activate
     ```
 
 3. Instala las dependencias:
@@ -93,7 +92,6 @@ Este proyecto es un chatbot RAG desarrollado con Django que utiliza Cohere para 
     ```
     COHERE_API_KEY=tu_clave_cohere
     DJANGO_SECRET_KEY=tu_clave_secreta_django
-    ALLOWED_IFRAME_ORIGINS=dominio1.com,dominio2.com
     ```
 
 5. Realiza las migraciones de la base de datos:
@@ -101,10 +99,15 @@ Este proyecto es un chatbot RAG desarrollado con Django que utiliza Cohere para 
     python manage.py migrate
     ```
 
+5. Realiza las migraciones de las plantillas
+    ```
+    python manage.py collectstatic
+    ```
+
 ### Configuración en Producción
 Para entornos de producción, asegúrate de cambiar la variable `DEBUG` a `False` en el archivo `settings.py` dentro del directorio `project`. Esta configuración evita mostrar información sensible en caso de errores en producción.
 ```
-DEBUG = False  # Cambia a False en producción
+DEBUG = True  # Cambia a False en producción
 ```
 ### Configuración de Seguridad
 Para asegurar que solo los orígenes permitidos puedan cargar el chatbot en un iframe, se utiliza la variable `ALLOWED_IFRAME_ORIGINS` en el archivo `.env`. Esta variable se utiliza en la configuración `CSP_FRAME_ANCESTORS` dentro de `settings.py`.
