@@ -16,19 +16,24 @@ import warnings
 import os
 load_dotenv()
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost']
+
 
 # Application definition
 
@@ -39,6 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+    'csp',
+    'chatbot'
 ]
 
 MIDDLEWARE = [
@@ -50,21 +58,34 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'csp.middleware.CSPMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
-# Obtener la lista de dominios para ser insertado
-allowed_origins_list = [origin.strip() for origin in os.getenv('ALLOWED_IFRAME_ORIGINS', '').split(',') if origin.strip()]
+X_FRAME_OPTIONS = 'ALLOW-FROM '
+
+SESSION_COOKIE_SAMESITE = None
+CSRF_COOKIE_SAMESITE = None
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+
 # Permisos de insertar
 CSP_FRAME_ANCESTORS = [
     "'self'",
-    *allowed_origins_list,
 ]
+
+
 # Permisos de Scrips
 CSP_SCRIPT_SRC_ELEM = [
     "'self'",  
     'https://cdn.jsdelivr.net'
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "'self'",
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'project.urls'
 
@@ -132,14 +153,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "chatbot/static",
-    "/var/www/static/",
+    BASE_DIR / 'chatbot/static', 
 ]
+
+STATIC_ROOT = BASE_DIR / 'static'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -148,7 +169,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,  # Mantener loggers existentes activos
+    'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
             'format': '{levelname} {asctime} {module} {message}',
@@ -179,6 +200,3 @@ LOGGING = {
         },
     },
 }
-
-# Ignora todas las advertencias (no recomendado para uso general)
-#warnings.filterwarnings('ignore')
