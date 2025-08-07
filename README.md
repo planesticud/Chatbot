@@ -81,6 +81,12 @@ Este proyecto es un chatbot RAG desarrollado con Django que utiliza Cohere para 
     source venv/bin/activate
     ```
 
+    Windows
+    ```
+    python -m venv venv
+    venv\Scripts\Activate.ps1
+    ```
+
 3. Instala las dependencias:
     ```
     pip install -r requirements.txt
@@ -92,6 +98,7 @@ Este proyecto es un chatbot RAG desarrollado con Django que utiliza Cohere para 
     ```
     COHERE_API_KEY=tu_clave_cohere
     DJANGO_SECRET_KEY=tu_clave_secreta_django
+    TAVILY_API_KEY=tu_clave_tavily
     ```
 
 5. Realiza las migraciones de la base de datos:
@@ -152,12 +159,17 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': False,
         },
+        'websearch': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
     },
 }
 ```
 
 ### Configuración del Chatbot
-El archivo `config.json` permite configurar el chatbot para utilizar Cohere o AWS Bedrock. Aquí tienes un ejemplo del contenido de este archivo:
+El archivo `config.json` permite configurar el chatbot para utilizar Cohere, AWS Bedrock o Llama. Aquí tienes un ejemplo del contenido de este archivo:
 ```
 {
     "bot_type": "cohere",
@@ -165,15 +177,29 @@ El archivo `config.json` permite configurar el chatbot para utilizar Cohere o AW
         "aws_bedrock": {
             "model": "cohere.command-r-v1:0",
             "temperature": 0.2,
-            "max_tokens": 50,
-            "docs_directory": "./chatbot/docs/"
+            "max_tokens": 50
         },
         "cohere": {
             "model": "command-nightly",
             "temperature": 0.2,
-            "max_tokens": 100,
-            "docs_directory": "./chatbot/docs/"
+            "max_tokens": 100
+        },
+        "llama": {
+            "api_url": "https://0x4kt4cc-11434.use2.devtunnels.ms/api/generate",
+            "model": "llama3.2:3b",
+            "temperature": 0.7,
+            "max_tokens": 500
         }
+    },
+    "websearch": {
+        "include_domains": [
+            "planestic.udistrital.edu.co",
+            "udistrital.edu.co"
+        ],
+        "country": "colombia",
+        "max_results": 5,
+        "chunks_per_source": 3,
+        "search_depth": "advanced"
     }
 }
 ```

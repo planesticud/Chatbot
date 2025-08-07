@@ -21,9 +21,7 @@
     "websearch": {
         "include_domains": [
             "planestic.udistrital.edu.co",
-            "udistrital.edu.co",
-            "autoevaluacionyacreditacion.udistrital.edu.co",
-            "moodleilud.udistrital.edu.co"
+            "udistrital.edu.co"
         ],
         "country": "colombia",
         "max_results": 5,
