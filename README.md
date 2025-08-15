@@ -173,7 +173,7 @@ LOGGING = {
 El archivo `config.json` permite configurar el chatbot para utilizar Cohere, AWS Bedrock o Llama. Aquí tienes un ejemplo del contenido de este archivo:
 ```
 {
-    "bot_type": "cohere",
+    "bot_type": "deepseek",
     "bot_config": {
         "aws_bedrock": {
             "model": "cohere.command-r-v1:0",
@@ -189,6 +189,12 @@ El archivo `config.json` permite configurar el chatbot para utilizar Cohere, AWS
             "api_url": "https://0x4kt4cc-11434.use2.devtunnels.ms/api/generate",
             "model": "llama3.2:3b",
             "temperature": 0.7,
+            "max_tokens": 500
+        },
+        "deepseek": {
+            "api_url": "https://api.deepseek.com/v1/chat/completions",
+            "model": "deepseek-chat",
+            "temperature": 0.3,
             "max_tokens": 500
         }
     },
