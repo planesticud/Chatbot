@@ -16,6 +16,12 @@
             "model": "llama3.2:3b",
             "temperature": 0.7,
             "max_tokens": 500
+        },
+        "deepseek": {
+            "api_url": "https://api.deepseek.com/v1/chat/completions",
+            "model": "deepseek-chat",
+            "temperature": 0.3,
+            "max_tokens": 500
         }
     },
     "websearch": {

@@ -1,7 +1,7 @@
 # ./chatbot/rag/handler_factory.py
 
 import logging
-from chatbot.rag.handlers import aws_bedrock_handler, cohere_handler, llama_handler
+from chatbot.rag.handlers import aws_bedrock_handler, cohere_handler, llama_handler, deepseek_handler
 
 logger = logging.getLogger(__name__)
 
@@ -29,6 +29,9 @@ def get_qa_handler(bot_type: str, bot_config: dict):
     elif bot_type == 'llama':
         logger.info('Inicializando Llama Handler...')
         return llama_handler.QA_LlamaHandler(**bot_config)
+    elif bot_type == 'deepseek':
+        logger.info('Inicializando DeepSeek Handler...')
+        return deepseek_handler.QA_DeepSeekHandler(**bot_config)
     else:
         logger.error('No se ha podido inicializar ningun Handler.')
         raise ValueError(f"Unsupported bot type: {bot_type}")
