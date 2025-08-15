@@ -1,5 +1,5 @@
 {
-    "bot_type": "cohere",
+    "bot_type": "deepseek",
     "bot_config": {
         "aws_bedrock": {
             "model": "cohere.command-r-v1:0",

@@ -83,7 +83,7 @@ CSP_SCRIPT_SRC_ELEM = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "'self'", 
+    "'self'",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
