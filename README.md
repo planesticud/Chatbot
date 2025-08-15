@@ -99,6 +99,7 @@ Este proyecto es un chatbot RAG desarrollado con Django que utiliza Cohere para 
     COHERE_API_KEY=tu_clave_cohere
     DJANGO_SECRET_KEY=tu_clave_secreta_django
     TAVILY_API_KEY=tu_clave_tavily
+    DEEPSEEK_API_KEY=tu_clave_deepseek
     ```
 
 5. Realiza las migraciones de la base de datos:
