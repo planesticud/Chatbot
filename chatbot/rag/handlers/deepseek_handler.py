@@ -81,6 +81,7 @@ class QA_DeepSeekHandler(BaseQAHandler, metaclass=SingletonMeta):
     def get_web_context(self, web_results: list) -> str:
         """
         Formats the web results into a context string for DeepSeek processing.
+        Now includes Markdown-formatted source references with clickable URLs.
         """
         if not web_results:
             return ""
@@ -93,7 +94,10 @@ class QA_DeepSeekHandler(BaseQAHandler, metaclass=SingletonMeta):
         for i, result in enumerate(web_results):
             content = result.get('raw_content', result.get('content', ''))
             if content:
-                source_info = f"[Fuente {i+1}] {result.get('title', 'Sin título')} - URL: {result.get('url', 'Sin URL')}"
+                # Formato Markdown mejorado para las fuentes con URLs clicables
+                title = result.get('title', 'Sin título')
+                url = result.get('url', 'Sin URL')
+                source_info = f"[{title}]({url})"
                 content = content.strip()
                 if total_length + len(content) + len(source_info) + 2 <= max_context_length:
                     context_parts.append(f"{source_info}\n{content}\n")
@@ -258,7 +262,7 @@ class QA_DeepSeekHandler(BaseQAHandler, metaclass=SingletonMeta):
               "2 Si la pregunta es ambigua o no especifica universidad, ASUME que se refiere a la UD.\n"
               "3 Si determinas que no es sobre la UD, usa el mismo mensaje de rechazo anterior.\n\n"
               "PRIORIDAD DE INFORMACIÓN:\n"
-              "A Usa EXCLUSIVAMENTE el [CONTEXTO_DE_TAVILY] cuando contenga la información solicitada. Cita fuentes como [Fuente N] si aparecen.\n"
+              "A Usa EXCLUSIVAMENTE el [CONTEXTO_DE_TAVILY] cuando contenga la información solicitada. Cita fuentes usando el formato Markdown exacto como aparecen: [Título](URL).\n"
               "B EXCEPCIÓN LIMITADA (solo DIRECCIONES/UBICACIONES de sedes/campus UD): si la pregunta es sobre 'dirección', 'ubicación', "
               "'sede' o 'campus' y el [CONTEXTO_DE_TAVILY] NO trae la dirección concreta, puedes responder con tu conocimiento institucional "
               "general de la UD. Al usar esta excepción, empieza con 'Referencia conocida:' y entrega la(s) dirección(es). Limítate a sedes/campus "
@@ -267,8 +271,12 @@ class QA_DeepSeekHandler(BaseQAHandler, metaclass=SingletonMeta):
               "C Para cualquier otro tipo de dato (autoridades, calendarios, costos, requisitos, etc.), si no está en el contexto, di: "
               "'No encuentro esa información en el contexto proporcionado.'\n\n"
               "FORMATO DE RESPUESTA:\n"
+              "- Responde en texto normal y claro, sin formato especial.\n"
               "- Sé directo y claro. Si se pide una cantidad específica, devuelve exactamente ese número si el contexto lo permite.\n"
-              "- Cuando uses el contexto, cita [Fuente N] si corresponde. No inventes contenido que no esté en el contexto (salvo la excepción B).\n"
+              "- SOLO para citar fuentes del contexto, usa el formato Markdown exacto: [Título](URL).\n"
+              "- Las fuentes deben ser enlaces clicables en formato Markdown. El resto del texto debe ser normal, sin formato Markdown.\n"
+              "- Incluye las citas de fuentes al final de la información relevante.\n"
+              "- No inventes contenido que no esté en el contexto (salvo la excepción B).\n"
               "- No muestres tu análisis interno ni el enrutamiento; entrega solo la respuesta final."
           )
 
