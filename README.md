@@ -221,6 +221,30 @@ El archivo `config.json` permite configurar el chatbot para utilizar Cohere, AWS
 
 3. Para interactuar con el chatbot, asegúrate de haber cargado correctamente los documentos PDF en la carpeta `docs/`.
 
+## Documentación de la API
+
+El proyecto incluye documentación completa de la API usando Swagger/OpenAPI:
+
+### Acceso a la Documentación
+- **Swagger UI (Interactiva)**: [http://127.0.0.1:8000/swagger/](http://127.0.0.1:8000/swagger/)
+- **ReDoc (Documentación estática)**: [http://127.0.0.1:8000/redoc/](http://127.0.0.1:8000/redoc/)
+- **Esquema JSON**: [http://127.0.0.1:8000/swagger.json](http://127.0.0.1:8000/swagger.json)
+- **Esquema YAML**: [http://127.0.0.1:8000/swagger.yaml](http://127.0.0.1:8000/swagger.yaml)
+
+### Endpoints de la API
+- `POST /api/send_message/` - Enviar mensajes al chatbot
+- `GET /api/system_info/` - Obtener información del sistema
+- `GET /api/health/` - Health check del sistema
+
+### Características de la API
+- **Documentación completa** con ejemplos y esquemas
+- **Interfaz interactiva** para probar endpoints
+- **Validación de datos** con serializers
+- **Respuestas de error** detalladas
+- **Seguridad CSRF** implementada
+
+Para más detalles, consulta la [documentación completa de la API](chatbot/docs/API_DOCUMENTATION.md).
+
 ## Parte Visual
 El chatbot utiliza HTML, CSS y JavaScript para su interfaz. Los archivos relevantes se encuentran en `templates/index.html`, `static/css/styles.css`, y `static/js/scripts.js`.
 1. `index.html` define la estructura básica del chat, incluyendo el campo de entrada y el botón de envío.
