@@ -214,6 +214,20 @@ class QA_DeepSeekHandler(BaseQAHandler, metaclass=SingletonMeta):
         return sorted(web_results or [], key=score, reverse=True)
 
 
+    def _is_greeting_only(self, query: str) -> bool:
+        """
+        Devuelve True si el mensaje del usuario es únicamente un saludo
+        (sin contenido adicional). Limpia puntuación inicial/final para
+        permitir coincidencias como "¡Hola!".
+        """
+        if not query:
+            return False
+        lowered = (query or "").lower().strip()
+        # Quitar puntuación al inicio y al final
+        cleaned = re.sub(r'^[¡!¿?.,;:\-\s]+|[¡!¿?.,;:\-\s]+$', '', lowered)
+        return any(re.fullmatch(pattern, cleaned) for pattern in greetings)
+
+
     def get_answer(self, query: str) -> str:
         try:
             # Verificar patrones de despedida y agradecimiento (estos sí deben interrumpir)
@@ -221,6 +235,10 @@ class QA_DeepSeekHandler(BaseQAHandler, metaclass=SingletonMeta):
                 return random.choice(farewell_messages)
             elif any(re.match(pattern, query.lower()) for pattern in gratefulness):
                 return random.choice(gratefulness_messages)
+
+            # Si el input es exactamente un saludo (y nada más), responde con saludo por defecto
+            if self._is_greeting_only(query):
+                return random.choice(greeting_messages)
 
             # Búsqueda web
             effective_query = self._refine_query_for_ud_intent(query)

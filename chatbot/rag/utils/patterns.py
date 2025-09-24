@@ -11,6 +11,8 @@ prompt_template = (
 
 greetings = [
     r'\bh[oó]+l+a+\b',                      # Variantes de "hola"
+    r'\bola\b',                             # Variantes de "ola"
+    r'\bbuen?s?\b',                         # Variantes de "buenas"
     r'\bbueno?s?\s*d[íi]+a+s*\b',           # Variantes de "buenos días"
     r'\bbuena?s?\s*ta+r+d+[eé]+s*\b',       # Variantes de "buenas tardes"
     r'\bbuena?s?\s*no+ch+[eé]+s*\b',        # Variantes de "buenas noches"
@@ -19,6 +21,8 @@ greetings = [
     r'\bhe+y+\b',                           # Variantes de "hey"
     r'\bqu[eé]+\s*ond+a+\b',                # Variantes de "qué onda"
     r'\bsalu+d+o+s*\s*c+o+r+d+i+a+les*\b',  # Variantes de "saludos cordiales"
+    r'\bcomo\s*estas*\b',                   # Variantes de "como estas"
+    r'\bcomo\s*estas\s*tu*\b',              # Variantes de "como estas tu"
 ]
 greeting_messages = [
     "# ¡Hola! 👋\n\nBienvenido/a a **PlanEsTIC - Universidad Distrital**. Somos un equipo dedicado a integrar las TIC en la educación y el desarrollo de nuestra universidad. ¿En qué puedo asistirte hoy?",
