@@ -112,6 +112,19 @@ Este proyecto es un chatbot RAG desarrollado con Django que utiliza Cohere para 
     python manage.py collectstatic
     ```
 
+### Ejecutar tests
+Puedes ejecutar los tests unitarios ubicados en el directorio `tests/` de las siguientes formas:
+
+- Con unittest (incluido en la librería estándar):
+```
+python -m unittest discover -s tests -v
+```
+
+- Con pytest (si lo tienes instalado):
+```
+pytest -q
+```
+
 ### Configuración en Producción
 Para entornos de producción, asegúrate de cambiar la variable `DEBUG` a `False` en el archivo `settings.py` dentro del directorio `project`. Esta configuración evita mostrar información sensible en caso de errores en producción.
 ```

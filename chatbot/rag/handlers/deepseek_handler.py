@@ -213,12 +213,11 @@ class QA_DeepSeekHandler(BaseQAHandler, metaclass=SingletonMeta):
             return s
         return sorted(web_results or [], key=score, reverse=True)
 
+
     def get_answer(self, query: str) -> str:
         try:
-            # Patrones predefinidos
-            if any(re.match(pattern, query.lower()) for pattern in greetings):
-                return random.choice(greeting_messages)
-            elif any(re.match(pattern, query.lower()) for pattern in farewell):
+            # Verificar patrones de despedida y agradecimiento (estos sí deben interrumpir)
+            if any(re.match(pattern, query.lower()) for pattern in farewell):
                 return random.choice(farewell_messages)
             elif any(re.match(pattern, query.lower()) for pattern in gratefulness):
                 return random.choice(gratefulness_messages)
@@ -261,6 +260,13 @@ class QA_DeepSeekHandler(BaseQAHandler, metaclass=SingletonMeta):
               "'Solo puedo responder preguntas relacionadas con la Universidad Distrital Francisco José de Caldas y sus sitios oficiales.'\n"
               "2 Si la pregunta es ambigua o no especifica universidad, ASUME que se refiere a la UD.\n"
               "3 Si determinas que no es sobre la UD, usa el mismo mensaje de rechazo anterior.\n\n"
+              "MANEJO DE SALUDOS:\n"
+              "Si el usuario te saluda (hola, buenos días, buenas tardes, buenas noches, qué tal, saludos, hey, qué onda, etc.) "
+              "y también hace una pregunta en el mismo mensaje, debes:\n"
+              "- Responder con un saludo amigable y profesional\n"
+              "- Luego responder la pregunta usando el contexto proporcionado\n"
+              "- Si solo hay saludo sin pregunta, responde solo con el saludo\n"
+              "- Usa variaciones naturales de saludo, no repitas exactamente lo mismo\n\n"
               "PRIORIDAD DE INFORMACIÓN:\n"
               "A Usa EXCLUSIVAMENTE el [CONTEXTO_DE_TAVILY] cuando contenga la información solicitada. Cita fuentes usando el formato Markdown exacto como aparecen: [Título](URL).\n"
               "B EXCEPCIÓN LIMITADA (solo DIRECCIONES/UBICACIONES de sedes/campus UD): si la pregunta es sobre 'dirección', 'ubicación', "
@@ -280,11 +286,7 @@ class QA_DeepSeekHandler(BaseQAHandler, metaclass=SingletonMeta):
               "- No muestres tu análisis interno ni el enrutamiento; entrega solo la respuesta final."
           )
 
-
-
             # Llamada a DeepSeek con system rules + prompt de 3 partes (análisis, contexto, pregunta)
-
-            #response = self.call_deepseek_api(system_prompt=context, user_prompt=query)
             response = self.call_deepseek_api(system_prompt=system_prompt, user_prompt=formatted_prompt)
             return response
         except Exception:
