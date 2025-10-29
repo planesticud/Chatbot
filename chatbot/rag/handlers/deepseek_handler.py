@@ -252,7 +252,7 @@ class QA_DeepSeekHandler(BaseQAHandler, metaclass=SingletonMeta):
                 logger.warning(f"No se encontraron resultados web para: '{query}'")
                 return "Lo siento, no pude encontrar información relevante en la web para responder tu consulta."
 
-            # Fallback temprano robusto: si aparece el boletín 2 oficial en cualquier resultado, responder directo
+            # Fallback temprano.
             try:
                 for r in (web_results or []):
                     u = (r.get('url') or '').lower()
@@ -418,12 +418,9 @@ class QA_DeepSeekHandler(BaseQAHandler, metaclass=SingletonMeta):
               "REGLAS DE CITACIÓN Y FUENTES (MUY IMPORTANTE):\n"
               "A **Tu respuesta DEBE BASARSE EXCLUSIVAMENTE en el [CONTEXTO_DE_TAVILY] proporcionado.**\n"
               "B **ES OBLIGATORIO citar la fuente de CADA dato que extraigas del contexto.**\n"
-              "C La cita DEBE usar el formato Markdown exacto como aparece en el contexto: `[Título](URL)`.\n"
-              "D Coloca la cita `[Título](URL)` inmediatamente después de la frase o párrafo que contiene la información.\n"
-              "E **Si la información solicitada NO ESTÁ en el contexto**, debes responder EXACTAMENTE: 'No encuentro esa información en el contexto proporcionado.' (A menos que aplique la Excepción F).\n\n"
-              "F **EXCEPCIÓN (DIRECCIONES UD):** Si la pregunta es sobre 'dirección', 'ubicación', 'sede' o 'campus' de la UD y el contexto NO trae la dirección concreta, "
-              "puedes usar tu conocimiento institucional. En este caso, empieza con 'Referencia conocida:' y NO incluyas una URL. "
-              "Si no estás seguro, usa la respuesta de la regla E.\n\n"
+              "C La cita o URL DEBE usar el formato HTML exacto y usar el target _blank para abrir en una nueva ventana: <a href=\"URL\" target=\"_blank\">Título</a>.\n"
+              "D Coloca la cita o URL en formato HTML inmediatamente después de la frase o párrafo que contiene la información.\n"
+              "E **Si la información solicitada NO ESTÁ en el contexto**, debes responder EXACTAMENTE: 'No encuentro esa información en el contexto proporcionado.'.\n"
               "FORMATO DE RESPUESTA FINAL:\n"
               "- Responde en texto normal y claro.\n"
               "- Sé directo y claro.\n"
