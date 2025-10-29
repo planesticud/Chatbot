@@ -30,6 +30,7 @@ def get_qa_handler(bot_type: str, bot_config: dict):
         logger.info('Inicializando Llama Handler...')
         return llama_handler.QA_LlamaHandler(**bot_config)
     elif bot_type == 'deepseek':
+        logger.info('Version v1.0.0')
         logger.info('Inicializando DeepSeek Handler...')
         return deepseek_handler.QA_DeepSeekHandler(**bot_config)
     else:
